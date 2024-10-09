@@ -1,7 +1,7 @@
 import requests
 from pyfiglet import Figlet
 import os, time
-
+import functions2
 # Help! I'm trying to make this cool bot but my code is too messy :( Please help me organise it into reusable components.
 
 # Define your reusable functions here:
@@ -12,6 +12,29 @@ def guess_gender(name):
     gender = gender_resp["gender"]
     prob_percent = gender_resp["probability"] * 100
     return [gender, prob_percent]
+
+
+f = Figlet(font="slant")
+print(f.renderText("HEY!"))
+
+print("Welcome to the weird weather bot :)")
+print("-----------------------------------\n")
+n = input("May I take your first name please? ")
+n = functions2.valid(n)
+gender_result = guess_gender(n)
+print(f"\nHmmm, I'm {gender_result[1]}% sure you are a {gender_result[0]}.")
+print(functions2.correct_gender())
+
+place = functions2.postcode()
+# 'altered' print(f"Nice! so you live in {place[0]}.\n")
+functions2.creepy(place[0])
+functions2.weather_stall()
+w = functions2.weather(place)
+print(f"\nThe weather in {place[0]}:\n")
+print(str(w[0]) + "℃")
+print(f"{w[1]} - {w[2]}")
+
+print("\nThank you! Bye.")
 
 ###########################################
 
@@ -85,14 +108,17 @@ weird_weather_bot()
 # After you have written the reusable functions, answer the following:
 # Questions:
 # 1. What are the preconditions for your code not to break?
+## the user's inputs do not contain numbers, except from the postcode.
 # 2. Validate the user's input based on your preconditions.
+## created function called valid
 # 3. Why was it useful to use reusable components in this case? Please mention at least 2 reasons and don't forget to contextualise.
-
+## It allows me to organise code so that i know what each function is responsible for. It also allows us to manage the decomposition of a problem as all sub-problems can easily be managed and identified.
 # Further Tasks:
 # 1. Put your functions in seperate appropriate files and import them in.
+## in the file called functions2.py
 # 2. Make sure all of your functions (except the main one) only do ONE thing or process.
 # 3. Add your own twist to the code.
-
+## new function made 
 # Extension:
 # Add the following apis as reusable components and use them in your code:
 # https://www.exchangerate-api.com/docs/overview
